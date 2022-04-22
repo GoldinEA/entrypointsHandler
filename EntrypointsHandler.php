@@ -112,13 +112,16 @@ class EntrypointsHandler
      */
     private function loadEntrypoints(): void
     {
+        $pathToFile = $_SERVER['DOCUMENT_ROOT'] . '/' . $this->base . $this->entrypointsFile;
+
+        if (!file_exists($pathToFile)) {
+            throw new Exception("File $pathToFile is not found.");
+        }
+
         $entryPoints = json_decode(file_get_contents(
-            $_SERVER['DOCUMENT_ROOT'] . '/' . $this->base . $this->entrypointsFile
+            $pathToFile
         ), true);
 
-        if (!(bool)$entryPoints) {
-            throw new Exception('Entrypoints file not found!');
-        }
         $this->chunks = array_keys($entryPoints['app'] ?? $entryPoints['main']);
         $this->entryPoints = $entryPoints;
     }
