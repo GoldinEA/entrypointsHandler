@@ -100,7 +100,7 @@ class EntrypointsHandler
     public function loadJs(): void
     {
         array_walk($this->jsFiles, function ($filePath) {
-            echo '<script src="'. $filePath .'"></script>';
+            echo '<script src="' . $filePath . '"></script>';
         });
     }
 
